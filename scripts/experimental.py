@@ -1,15 +1,17 @@
+import warnings
+warnings.filterwarnings('ignore')
+
 import pandas as pd
-import importlib
-from modules import classification_metrics,loader, crossval
-modules_to_reload = [classification_metrics,loader, crossval]
-for m in modules_to_reload:
-    importlib.reload(m)
-
-
-from my_packages.imports import *
-from modules.loader import load_data
 from modules.classification_metrics import classification_metrics
 from modules.crossval import cv_score
+from modules.loader import load_data
+
+#This is dead code. Modules not used anywhere at the moment.
+#modules_to_reload = [classification_metrics,loader, crossval]
+#for m in modules_to_reload:
+#   importlib.reload(m)
+#from my_packages.imports import *
+# import importlib
 
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LogisticRegression
@@ -17,7 +19,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 
-df = load_data("data.csv")
+df = load_data("data/data.csv")
 
 object = df.select_dtypes(include='object').columns
 number = df.select_dtypes(include='number').columns
