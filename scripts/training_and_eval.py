@@ -1,10 +1,13 @@
 import warnings
-warnings.filterwarnings('ignore')
-
 import pandas as pd
 from modules.classification_metrics import classification_metrics
 from modules.crossval import cv_score
 from modules.loader import load_data
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import GridSearchCV
 
 #This is dead code. Modules not used anywhere at the moment.
 #modules_to_reload = [classification_metrics,loader, crossval]
@@ -13,14 +16,12 @@ from modules.loader import load_data
 #from my_packages.imports import *
 # import importlib
 
-from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import GridSearchCV
+
+warnings.filterwarnings('ignore')
 
 df = load_data("data/data.csv")
 
+# Here the object and the number variables are not used anywhere.
 object = df.select_dtypes(include='object').columns
 number = df.select_dtypes(include='number').columns
 
