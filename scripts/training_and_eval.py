@@ -25,6 +25,7 @@ def training_and_eval(model_instance, path_to_data):
     X_train_scaled = sc.fit_transform(X_train)
     X_test_scaled = sc.transform(X_test)
     
+    #These are the best parameters derived from a Grid search.
     Logistic_Regression = model_instance(C=1.5,l1_ratio=0.1,solver='saga')
     Logistic_Regression.fit(X_train_scaled,y_train)
     y_pred = Logistic_Regression.predict(X_test_scaled)
@@ -34,10 +35,14 @@ def training_and_eval(model_instance, path_to_data):
     return eval_metrics, confusion_matrix
 
 
-eval_metrics, confusion_matrix = training_and_eval(model_instance=LogisticRegression, path_to_data = "data/data.csv")
+def main():
+    
+    eval_metrics, confusion_matrix = training_and_eval(model_instance=LogisticRegression, path_to_data = "data/data.csv")
 
-print(f"Eval metrics: \n {eval_metrics}\n")
-print(f"Confusion metrics: \n {confusion_matrix}")
+    print(f"Eval metrics: \n {eval_metrics}\n")
+    print(f"Confusion metrics: \n {confusion_matrix}")
 
+if __name__ == "__main__":
+    main()
 
 
