@@ -31,8 +31,8 @@ def classification_metrics(Model:str, y_test,y_pred):
     prec = precision_score(y_test, y_pred)
     rec = recall_score(y_test, y_pred)
     cm = confusion_matrix(y_test,y_pred)
-    metrics_df = pd.DataFrame([[Model, acc, f1, prec, rec]], 
+    eval_metrics_df = pd.DataFrame([[Model, acc, f1, prec, rec]], 
                         columns = ['Model','Accuracy', 'F1 Score', 'Precision', 'Recall']).round(3)
-    cm_df = pd.DataFrame(cm, index = ['Actual 0','Actual 1'], columns = ['Pred 0','Pred 1'])
+    confusion_matrix_df = pd.DataFrame(cm, index = ['Actual 0','Actual 1'], columns = ['Pred 0','Pred 1'])
 
-    return metrics_df, cm_df
+    return eval_metrics_df, confusion_matrix_df
