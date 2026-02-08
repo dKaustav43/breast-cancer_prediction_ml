@@ -2,5 +2,5 @@
 .python-version
 __pycache__
 *.egg-info
-comparing*.py
 notes.md
+gridsearch_hyperparameter_tuning.py
