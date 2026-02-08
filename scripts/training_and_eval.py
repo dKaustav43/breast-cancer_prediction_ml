@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 
 warnings.filterwarnings('ignore')
 
-def training_and_eval(model_instance, path_to_data):
+def training_and_eval(model_instance, path_to_data) -> tuple[pd.DataFrame, pd.DataFrame]:
 
     df = load_data(path_to_data)
     
