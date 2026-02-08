@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import cross_val_score
 
-def cv_score(model:str, model_instance,X_train,y_train,cv,scoring):
+def cv_score(model:str, model_instance, X_train, y_train, cv:int, scoring:str):
     """
     Computed cross_val_score and returns
     - An array of Cross_Val score
