@@ -13,9 +13,8 @@ def cv_score(model:str, model_instance, X_train, y_train, cv:int, scoring:str):
         X_train - array like training data
         y_train - array like true labels
 
-    Retuns:
-        cv_score (Array)
-        scores (pd.DataFrame)
+    Returns:
+        Mean and Stddev of CV scores (pd.DataFrame)
 
     """
     cv_score = cross_val_score(model_instance,X=X_train,
@@ -24,6 +23,6 @@ def cv_score(model:str, model_instance, X_train, y_train, cv:int, scoring:str):
     mean_score = cv_score.mean().round(3)
     stddev_score = cv_score.std().round(3)
     
-    CV_scores = pd.DataFrame([[model, mean_score , stddev_score]], columns=["model","meanCV","stddevCV"])
+    Crossval_mean_stddev_scores = pd.DataFrame([[model, mean_score , stddev_score]], columns=["model","meanCV","stddevCV"])
 
-    return cv_score, CV_scores
+    return Crossval_mean_stddev_scores
