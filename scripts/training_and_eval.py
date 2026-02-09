@@ -26,7 +26,7 @@ def training_and_eval(model_instance, path_to_data) -> tuple[pd.DataFrame, pd.Da
     X_test_scaled = sc.transform(X_test)
     
     #These are the best parameters derived from a Grid search.
-    Logistic_Regression = model_instance(C=1.5,l1_ratio=0.1,solver='saga')
+    Logistic_Regression = model_instance(C=1.5,l1_ratio=0.1,penalty='l2',solver='saga')
     Logistic_Regression.fit(X_train_scaled,y_train)
     y_pred = Logistic_Regression.predict(X_test_scaled)
     
