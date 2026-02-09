@@ -6,11 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
-
-
+from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings('ignore')
-
-
 
 def gridsearch(estimator, param_grid:dict, scoring:str, cv:int):
     
@@ -44,7 +41,7 @@ def main():
         "l1_ratio":[0.1,0.5,0.9]
     }
     best_estimator = gridsearch(LogisticRegression(),param_grid,scoring='accuracy',cv=5)    
-    print(f"Best Estimator:\n{best_estimator}")
+    print(f"Best Estimator:\n{best_estimator}")    
 
 if __name__ == "__main__":
     main()
