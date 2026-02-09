@@ -8,7 +8,14 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings('ignore')
 
-def gridsearch(estimator, param_grid:dict, scoring:str, cv:int):
+param_grid = {
+        "penalty" : ['l1','l2','elasticnet'],
+        "C": [0.25,0.5,0.75,1.0,1.5,1.75,2.0],
+        "solver":['saga'],
+        "l1_ratio":[0.1,0.5,0.9]
+    }
+
+def gridsearch_bestestimator(estimator=LogisticRegression(), param_grid=param_grid, scoring='accuracy', cv=5):
     
     df = load_data("data/data.csv")
 
@@ -33,13 +40,9 @@ def gridsearch(estimator, param_grid:dict, scoring:str, cv:int):
 
 def main():
 
-    param_grid = {
-        "penalty" : ['l1','l2','elasticnet'],
-        "C": [0.25,0.5,0.75,1.0,1.5,1.75,2.0],
-        "solver":['saga'],
-        "l1_ratio":[0.1,0.5,0.9]
-    }
-    best_estimator = gridsearch(LogisticRegression(),param_grid,scoring='accuracy',cv=5)    
+    #best_estimator = gridsearch_bestestimator(LogisticRegression(),param_grid,scoring='accuracy',cv=5)    
+    best_estimator = gridsearch_bestestimator()    
+
     print(f"Best Estimator:\n{best_estimator}")    
 
 if __name__ == "__main__":
