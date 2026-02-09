@@ -1,6 +1,5 @@
 import warnings
 import pandas as pd
-from modules.classification_metrics import classification_metrics
 from modules.loader import load_data
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LogisticRegression
