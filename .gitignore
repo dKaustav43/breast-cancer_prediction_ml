@@ -3,4 +3,3 @@
 __pycache__
 *.egg-info
 notes.md
-gridsearch_hyperparameter_tuning.py
