@@ -5,11 +5,12 @@ from modules.loader import load_data
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
+from modules.gridsearch_hyperparameter_tuning import gridsearch_bestestimator
 
 
 warnings.filterwarnings('ignore')
 
-def training_and_eval(model_instance, path_to_data) -> tuple[pd.DataFrame, pd.DataFrame]:
+def training_and_eval(final_model_name:str, model_instance_with_best_params, path_to_data:str):
 
     df = load_data(path_to_data)
     
@@ -25,19 +26,17 @@ def training_and_eval(model_instance, path_to_data) -> tuple[pd.DataFrame, pd.Da
     X_train_scaled = sc.fit_transform(X_train)
     X_test_scaled = sc.transform(X_test)
     
-    #These are the best parameters derived from a Grid search.
-    Logistic_Regression = model_instance(C=1.5,l1_ratio=0.1,penalty='l2',solver='saga')
-    Logistic_Regression.fit(X_train_scaled,y_train)
-    y_pred = Logistic_Regression.predict(X_test_scaled)
+    model_instance_with_best_params.fit(X_train_scaled,y_train)
+    y_pred = model_instance_with_best_params.predict(X_test_scaled)
     
-    eval_metrics, confusion_matrix = classification_metrics('Logistic Refression',y_test,y_pred)
+    eval_metrics, confusion_matrix = classification_metrics(final_model_name,y_test,y_pred)
     
     return eval_metrics, confusion_matrix
 
 
 def main():
     
-    eval_metrics, confusion_matrix = training_and_eval(model_instance=LogisticRegression, path_to_data = "data/data.csv")
+    eval_metrics, confusion_matrix = training_and_eval(final_model_name = 'Logistic Regression', model_instance_with_best_params=gridsearch_bestestimator(), path_to_data = "data/data.csv")
 
     print(f"Eval metrics: \n {eval_metrics}\n")
     print(f"Confusion metrics: \n {confusion_matrix}")
