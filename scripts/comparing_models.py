@@ -2,11 +2,8 @@ import warnings
 import pandas as pd
 from modules.crossval import cv_score
 from modules.data_loading_preprocessing import load_data_remove_columns_splitting_and_scaling_X_y_data
-from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-
 
 warnings.filterwarnings('ignore')
 

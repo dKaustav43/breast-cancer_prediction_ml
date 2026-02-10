@@ -1,10 +1,6 @@
 import warnings
-import pandas as pd
 from modules.classification_metrics import classification_metrics
 from modules.data_loading_preprocessing import load_data_remove_columns_splitting_and_scaling_X_y_data
-from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler
 from modules.gridsearch_hyperparameter_tuning import gridsearch_bestestimator
 
 
