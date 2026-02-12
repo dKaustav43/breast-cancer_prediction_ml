@@ -1,0 +1,10 @@
+.python-version
+__pycache__
+#*.egg-info
+notes.md
+Dockerfile
+__pycache__/*
+.venv
+experimental_notebooks
+README.md
+requirements.txt
