@@ -1,6 +1,5 @@
-[build-system]
-requires = ["uv_build>=0.10.2,<0.11.0"]
-build-backend = "uv_build"
+requires = ["setuptools>=78.1.0", "wheel>=0.45.1"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "breastcancerpredict-notebook"
@@ -14,7 +13,3 @@ dependencies = [
     "pandas>=3.0.0",
     "scikit-learn>=1.8.0",
 ]
-
-[tool.uv.build-backend]
-module-name = "modules"
-module-root = "src"
