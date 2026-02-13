@@ -10,4 +10,5 @@ RUN uv sync --locked
 
 COPY . .
 
-CMD ["uv","run","python", "scripts/final_training_and_eval.py"]
+CMD ["uv", "run", "python", "scripts/final_training_and_eval.py"]
+#CMD ["uv","run","python", "scripts/comparing_models.py"]
