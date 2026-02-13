@@ -8,3 +8,4 @@ __pycache__/*
 experimental_notebooks
 README.md
 requirements.txt
+dist
