@@ -38,6 +38,17 @@ python scripts/final_training_and_eval.py
 To see the model comparison results, run:
 ```bash
 python scripts/model_comparison.py
+```
+## Using Docker
+
+1. Build the Docker image:
+   ```bash
+   docker build -t breast-cancer-prediction:1.0 .
+   ```
+2. Run the Docker container:
+    ```bash
+    docker run -it --rm breast-cancer-prediction:1.0
+    ```
 
 ## Results
 
