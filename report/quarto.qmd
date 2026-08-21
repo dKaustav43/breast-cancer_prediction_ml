@@ -1,0 +1,116 @@
+---
+title: "Breast Cancer Prediction with ML"
+toc: true
+format:
+    html:
+        code-fold: true
+        code-link: true
+        code-links:
+            - text: Github repo
+              repo: https://github.com/dKaustav43/breast-cancer_prediction_ml
+jupyter: python3
+---
+
+```{python}
+#block setting the working directory and python search path for modules
+import os
+import sys
+from pathlib import Path
+
+parent_dir = Path.cwd().parent
+print(parent_dir)
+os.chdir(parent_dir)
+
+#add current directory to python search path for modules
+sys.path.append(os.getcwd())
+```
+
+```{python}
+# The import block 
+import pandas as pd
+from modules.dataexplore import dataframedatatypes, columntypes, statsummary,checkmissingvalues
+from modules.data_loading_preprocessing import load_data_remove_columns_splitting_and_scaling_X_y_data
+from modules.gridsearch_hyperparameter_tuning import gridsearch_bestestimator
+from scripts.comparing_models import comparing_models
+from scripts.final_training_and_eval import training_and_eval
+```
+## Data Charateristics
+
+```{python}
+#Data characteristics
+df_cancer_data = pd.read_csv("data/data.csv")
+df_cancer_data.head(5)
+```
+The data shows the physical characteristics vs. the diagnosis. 
+```{python}
+stats = statsummary(df = df_cancer_data)
+stats
+```
+There are 569 data points. We don't need ID and Unnamed:32 columns.
+Also domain knowledge would determine which columns to further disregard before perfroming ML training and further analysis. 
+
+```{python}
+missing_values = checkmissingvalues(df = df_cancer_data)
+missing_values
+```
+As you can see that the data is complete excep for one column which is removed from analysis.
+
+```{python}
+value_counts = df_cancer_data['diagnosis'].value_counts()
+value_counts
+```
+
+It is a binary classification problem as there are two types of classification - Bening and Malignant. They are unqequal in distribution.
+
+Also in the final analysis this data needs to be encoded and is done using pd.get_dummies().
+
+## Data split train/test
+
+```{python}
+X_train_scaled, y_train, X_test_scaled, y_test = load_data_remove_columns_splitting_and_scaling_X_y_data()
+print(f"A single X_train_scaled: \n {X_train_scaled[:1]}")
+print(f"First 10 y_train_data: \n {y_train[:10]}")
+```
+
+## Classification Models
+
+After splitting the data, two classification models are selected to fit the training data.
+The code is in comapring_models.py 
+The CV scores based on accurary are :-
+```{python}
+df_model_comaprison = comparing_models()
+df_model_comaprison
+```
+
+Both the models perform very well. Logistic Regression is slightly better and hence thats the final model.
+
+To find the best set of hyper-parameters a GridSerchCV was run on the training dataset.
+
+
+```{python}
+param_grid = {
+        "penalty" : ['l1','l2','elasticnet'],
+        "C": [0.25,0.5,0.75,1.0,1.5,1.75,2.0],
+        "solver":['saga'],
+        "l1_ratio":[0.1,0.5,0.9]
+    }
+best_estimator = gridsearch_bestestimator()    
+print(f"Best Estimator:\n{best_estimator}") 
+```
+
+## Training and Evaluation
+
+A final training is run using the best parameters from the GridSearch results. 
+The final evaluations results are:-
+
+```{python}
+eval_metrics, confusion_matrix = training_and_eval(final_model_name = 'Logistic Regression')
+
+print(f"Eval metrics: \n {eval_metrics}\n")
+print(f"Confusion matrix: \n {confusion_matrix}")
+```
+
+This has improved the result even more than the previous Logistic Regression run. 
+
+
+
