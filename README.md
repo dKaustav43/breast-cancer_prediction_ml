@@ -2,6 +2,9 @@
 
 This project uses classical machine learning algorithms to predict breast cancer based on medical data. The goal is to select the best model for early detection and improve diagnostic accuracy.
 
+Docker is added for run the code inside a container. 
+No inference api is provided as this is a tutorial project.
+
 ## Features
 
 - Contains Jupyter Notebook which was used for early experimental analysis 
