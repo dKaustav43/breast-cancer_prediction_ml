@@ -8,6 +8,10 @@ from sklearn.ensemble import RandomForestClassifier
 warnings.filterwarnings('ignore')
 
 def comparing_models():
+    """
+    Computes the Cross-val score of two pre-selected classifier models - logistic regression and random forest.
+    Returns a dataframe of CV_metrics for both the models.
+    """
 
     X_train_scaled, y_train, X_test_scaled, y_test = load_data_remove_columns_splitting_and_scaling_X_y_data()
 
